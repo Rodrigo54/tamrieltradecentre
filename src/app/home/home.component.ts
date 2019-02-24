@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   }
 
   onClick(ItemID: string) {
-    console.log(ItemID);
     const navigationExtras: NavigationExtras = {
       queryParams: {
         ItemID,

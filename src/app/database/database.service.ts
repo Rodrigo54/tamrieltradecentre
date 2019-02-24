@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap, map } from 'rxjs/operators';
-import { pipe } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import * as moment from 'moment';
+import { pipe } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface ParamsSearch extends Params {
   ItemID: string;
@@ -50,7 +50,6 @@ export class DatabaseService {
     const params = { params: { term: text }};
     return this.httpClient.get('https://us.tamrieltradecentre.com/api/pc/Trade/GetItemAutoComplete', params).pipe(
       map((res: any[]) => res.map(i => ({ ...i, IconName: `https://us.tamrieltradecentre.com/Content/icons/${i.IconName}`}))),
-      tap(console.log),
     );
   }
 
@@ -108,7 +107,6 @@ export class DatabaseService {
         });
         return { itens: arrayItens, pagination: arrayPagination };
       }),
-      tap(e => console.log(e))
     );
   }
 

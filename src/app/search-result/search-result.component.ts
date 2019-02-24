@@ -31,6 +31,5 @@ export class SearchResultComponent implements OnInit {
       };
       this.router.navigate(['/SearchResult'], navigationExtras);
     }
-    console.log(page);
   }
 }
