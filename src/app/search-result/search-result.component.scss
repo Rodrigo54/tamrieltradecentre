@@ -1,0 +1,81 @@
+.grid-itens{
+  display: flex;
+  flex-flow: column nowrap;
+  .item{
+    background-color: #e0ffff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #90ee90;
+    border-radius: 10px;
+    margin: 5px 0px;
+    &:hover{
+      border-width: 1px;
+      border-style: solid;
+      border-color: #FF9800;
+      border-radius: 10px;
+      background-color: #fff9c4;
+    }
+  }
+  .item-content{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    &>div{
+      margin-right: 15px;
+      flex: none;
+    }
+    .location{
+      flex: 0 0 30%;
+    }
+    .level{
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      img{
+        height: 22px;
+      }
+    }
+    .price{
+      flex: 0 0 35%;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      span{
+        color: #FF9800;
+        font-weight: 700;
+      }
+      img{
+        height: 28px;
+      }
+    }
+    .item-name{
+      flex: 0 0 35%;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+    }
+  }
+  .item-img{
+    margin-right: 10px;
+    object-fit: contain;
+  }
+  h3, p{
+    margin: 2px 0px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.pagination{
+  margin: 10px 0px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  .btn{
+    padding: 0px 5px;
+    min-width: 50px;
+  }
+}

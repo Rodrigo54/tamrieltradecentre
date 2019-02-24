@@ -1,0 +1,16 @@
+<div class="search-box">
+  <mat-card>
+    <input [formControl]="stateCtrl" [matAutocomplete]="auto" type="text" placeholder="Search for Item">
+  </mat-card>
+  <button class="btn-search" mat-raised-button color="primary">
+    Search <mat-icon>search</mat-icon>
+  </button>
+  <mat-autocomplete autoActiveFirstOption [displayWith]="displayWith" #auto="matAutocomplete" (optionSelected)="onSubmit($event)">
+    <mat-option *ngFor="let state of filteredStates | async" [value]="state">
+      <div class="autocomplete-option">
+        <img class="option-img" aria-hidden [src]="state.IconName">
+        <span>{{state.label}}</span>
+      </div>
+    </mat-option>
+  </mat-autocomplete>
+</div>

@@ -1,0 +1,41 @@
+.grid-itens{
+  display: grid;
+  grid-template: repeat(5, 1fr) / repeat(2, 1fr);
+  grid-gap: 15px;
+  .item{
+    background-color: #e0ffff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #90ee90;
+    border-radius: 10px;
+    &:hover{
+      border-width: 1px;
+      border-style: solid;
+      border-color: #FF9800;
+      border-radius: 10px;
+      background-color: #fff9c4;
+    }
+    .item-content{
+      display: flex;
+      flex-flow: row nowrap;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .item-img{
+      margin-right: 10px;
+      object-fit: contain;
+    }
+    h3, p{
+      margin: 0px;
+      display: flex;
+      align-items: center;
+    }
+    .gold-amount {
+      color: #FF9800;
+      font-weight: 700;
+    }
+    .gold-icon{
+      width: 30px;
+    }
+  }
+}

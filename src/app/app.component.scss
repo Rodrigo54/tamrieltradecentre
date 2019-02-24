@@ -1,0 +1,73 @@
+:host{
+  display: block;
+  height: initial;
+  background-color: #473b2b;
+  color: #fff;
+}
+.app-box{
+  display: flex;
+  flex-flow: column nowrap;
+}
+.header{
+  background-image: url('https://us.tamrieltradecentre.com/Content/images/trade-title-background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 60vh;
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(transparent 80%, #473b2b);
+  }
+  &>div{
+    z-index: 2;
+    position: relative;
+    height: 100%;
+  }
+}
+
+.hero{
+  height: 60%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  h1{
+    text-align: center;
+    letter-spacing: 1pt;
+  }
+  p{
+    margin-top: 0px;
+    font-style: italic;
+    font-size: 20px;
+  }
+}
+.content{
+  top: -150px;
+  z-index: 2;
+  position: relative;
+}
+
+.main-grid{
+  width: 90vw;
+  max-width: 900px;
+  margin: auto;
+  margin-top: 45px;
+  background-color: rgba(248,250,255,.9);
+}
+
+.home-link{
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  img{
+    height: 25px;
+    margin-right: 10px;
+  }
+}

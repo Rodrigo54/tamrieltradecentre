@@ -1,0 +1,24 @@
+:host{
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  display: block;
+}
+
+.links{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  a{
+    text-decoration: none;
+    color: white;
+    padding: 0px 5px;
+    &:not(:last-child) {
+      border-right: 1px solid white;
+    }
+    &:hover{
+      color: #1e88e5;
+      text-decoration: underline;
+    }
+  }
+}

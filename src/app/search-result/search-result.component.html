@@ -1,0 +1,60 @@
+<div class="grid-itens">
+  <ng-container *ngIf="data | async; let data">
+    <div class="item" *ngFor="let item of data.itens">
+      <div class="item-content">
+        <div class="item-name">
+          <img class="item-img" [src]="item.img" [alt]="item.name">
+          <div>
+            <h3>{{item.name}}</h3>
+            <div class="level">
+              <p>Level:</p>
+              <img src="https://us.tamrieltradecentre.com/Content/icons/nonvet.png" alt="level">
+              <p>{{item.level}}</p>
+            </div>
+            <p>Trader: {{item.trader}}</p>
+          </div>
+        </div>
+        <div class="location">
+          <p>Location: {{item.location}}</p>
+          <p>Guild: {{item.guild}}</p>
+        </div>
+        <div>
+          <div class="price">
+            <img src="https://us.tamrieltradecentre.com/Content/icons/gold.png" alt="gold">
+            <span>{{item.value.gold}}</span>
+            <mat-icon>clear</mat-icon>
+            <img src="https://us.tamrieltradecentre.com/Content/icons/amount.png" alt="item">
+            <span>{{item.value.amount}}</span>
+            <mat-icon>drag_handle</mat-icon>
+            <span>{{item.value.total}}</span>
+          </div>
+          <div class="lastSeen">
+            <p>Last Seen: {{item.lastSeen}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pagination">
+      <ng-container *ngFor="let page of data.pagination; let i=index">
+        <ng-container *ngIf="i === 0" >
+          <button (click)="pageClick(page.number)" class="btn" [disabled]="page.status === 'disabled'" mat-raised-button
+            [color]="page.status === 'active' ? 'accent' : 'primary'">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="i === data.pagination.length -1">
+          <button (click)="pageClick(page.number)" class="btn" [disabled]="page.status === 'disabled'" mat-raised-button
+            [color]="page.status === 'active' ? 'accent' : 'primary'">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="i !== 0 && i !== data.pagination.length -1">
+          <button (click)="pageClick(page.number)" class="btn" [disabled]="page.status === 'disabled'" mat-raised-button
+            [color]="page.status === 'active' ? 'accent' : 'primary'">
+            {{page.value}}
+          </button>
+        </ng-container>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
