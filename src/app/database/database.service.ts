@@ -17,10 +17,15 @@ export interface ParamsSearch extends Params {
 })
 export class DatabaseService {
 
+  proxy = 'https://thingproxy.freeboard.io/fetch/';
+
   constructor(private httpClient: HttpClient) { }
 
   getPopularItems() {
-    return this.httpClient.get('https://us.tamrieltradecentre.com/pc/Trade/', { responseType: 'text' }).pipe(
+    return this.httpClient.get(
+      `${this.proxy}https://us.tamrieltradecentre.com/pc/Trade/`,
+      { responseType: 'text' }
+    ).pipe(
       this.makeDoc(),
       map(htmlObject => {
         const itens = htmlObject.querySelectorAll('.popular-item-row');
@@ -47,15 +52,19 @@ export class DatabaseService {
   }
 
   autoComplete(text: string) {
-    const params = { params: { term: text }};
-    return this.httpClient.get('https://us.tamrieltradecentre.com/api/pc/Trade/GetItemAutoComplete', params).pipe(
+    return this.httpClient.get(
+      `${this.proxy}https://us.tamrieltradecentre.com/api/pc/Trade/GetItemAutoComplete`,
+      { params: { term: text } }
+    ).pipe(
       map((res: any[]) => res.map(i => ({ ...i, IconName: `https://us.tamrieltradecentre.com/Content/icons/${i.IconName}`}))),
     );
   }
 
   searchItem(data: Partial<ParamsSearch>) {
-    return this.httpClient.get('https://us.tamrieltradecentre.com/pc/Trade/SearchResult',
-    { responseType: 'text', params: { ...data } }).pipe(
+    return this.httpClient.get(
+      `${this.proxy}https://us.tamrieltradecentre.com/pc/Trade/SearchResult`,
+      { responseType: 'text', params: { ...data } }
+    ).pipe(
       this.makeDoc(),
       map(htmlObject => {
         const arrayItens = [];
