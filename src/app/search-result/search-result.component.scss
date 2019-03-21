@@ -1,3 +1,30 @@
+.header{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  h3{
+    font-weight: 500;
+  }
+  div{
+    display: flex;
+    align-items: center;
+  }
+  span, a{
+    margin: 0px 10px;
+  }
+  a{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    color: #4169e1;
+    cursor: pointer;
+    &:hover{
+      color: #FF9800;
+    }
+  }
+}
+
 .grid-itens{
   display: flex;
   flex-flow: column nowrap;

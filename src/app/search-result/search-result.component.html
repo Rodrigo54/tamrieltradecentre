@@ -1,4 +1,12 @@
 <div class="grid-itens">
+  <div class="header">
+    <h3>Search Result</h3>
+    <div>
+      <span>Sort By:</span>
+      <a (click)="sortClick('Price')">Price <mat-icon *ngIf="iconSort('Price'); let icon1">{{ icon1 }}</mat-icon></a>
+      <a (click)="sortClick('LastSeen')">Last Seen <mat-icon *ngIf="iconSort('LastSeen'); let icon2">{{ icon2 }}</mat-icon></a>
+    </div>
+  </div>
   <ng-container *ngIf="data | async; let data">
     <div class="item" *ngFor="let item of data.itens">
       <div class="item-content">
