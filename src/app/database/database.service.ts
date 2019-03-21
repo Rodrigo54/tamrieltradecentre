@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import * as moment from 'moment';
@@ -12,19 +12,26 @@ export interface ParamsSearch extends Params {
   page: string;
 }
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    Origin: 'https://us.tamrieltradecentre.com',
+    'Content-Type':  'text/html',
+  }),
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
 
-  proxy = 'https://thingproxy.freeboard.io/fetch/';
+  proxy = 'https://cors-anywhere.herokuapp.com/';
 
   constructor(private httpClient: HttpClient) { }
 
   getPopularItems() {
     return this.httpClient.get(
       `${this.proxy}https://us.tamrieltradecentre.com/pc/Trade/`,
-      { responseType: 'text' }
+      { ...httpOptions, responseType: 'text' }
     ).pipe(
       this.makeDoc(),
       map(htmlObject => {
@@ -54,7 +61,7 @@ export class DatabaseService {
   autoComplete(text: string) {
     return this.httpClient.get(
       `${this.proxy}https://us.tamrieltradecentre.com/api/pc/Trade/GetItemAutoComplete`,
-      { params: { term: text } }
+      { ...httpOptions, params: { term: text } }
     ).pipe(
       map((res: any[]) => res.map(i => ({ ...i, IconName: `https://us.tamrieltradecentre.com/Content/icons/${i.IconName}`}))),
     );
@@ -63,7 +70,7 @@ export class DatabaseService {
   searchItem(data: Partial<ParamsSearch>) {
     return this.httpClient.get(
       `${this.proxy}https://us.tamrieltradecentre.com/pc/Trade/SearchResult`,
-      { responseType: 'text', params: { ...data } }
+      { ...httpOptions, responseType: 'text', params: { ...data } }
     ).pipe(
       this.makeDoc(),
       map(htmlObject => {
