@@ -2,8 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import * as moment from 'moment';
-import { pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { pipe, of } from 'rxjs';
+import { map, finalize, first, catchError } from 'rxjs/operators';
+import { LoadingService } from '../shared/loading/loading.service';
 
 export interface ParamsSearch extends Params {
   ItemID: string;
@@ -14,7 +15,7 @@ export interface ParamsSearch extends Params {
 
 const httpOptions = {
   headers: new HttpHeaders({
-    Origin: 'https://us.tamrieltradecentre.com',
+    'x-requested-with': 'https://us.tamrieltradecentre.com',
     'Content-Type':  'text/html',
   }),
 };
@@ -26,13 +27,18 @@ export class DatabaseService {
 
   proxy = 'https://cors-anywhere.herokuapp.com/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private loading: LoadingService,
+  ) { }
 
   getPopularItems() {
+    this.loading.open();
     return this.httpClient.get(
       `${this.proxy}https://us.tamrieltradecentre.com/pc/Trade/`,
       { ...httpOptions, responseType: 'text' }
     ).pipe(
+      first(),
       this.makeDoc(),
       map(htmlObject => {
         const itens = htmlObject.querySelectorAll('.popular-item-row');
@@ -55,6 +61,7 @@ export class DatabaseService {
         });
         return array;
       }),
+      finalize(() => { this.loading.close(); })
     );
   }
 
@@ -68,10 +75,12 @@ export class DatabaseService {
   }
 
   searchItem(data: Partial<ParamsSearch>) {
+    this.loading.open();
     return this.httpClient.get(
       `${this.proxy}https://us.tamrieltradecentre.com/pc/Trade/SearchResult`,
       { ...httpOptions, responseType: 'text', params: { ...data } }
     ).pipe(
+      first(),
       this.makeDoc(),
       map(htmlObject => {
         const arrayItens = [];
@@ -123,6 +132,8 @@ export class DatabaseService {
         });
         return { itens: arrayItens, pagination: arrayPagination };
       }),
+      catchError(error => of([])),
+      finalize(() => { this.loading.close(); })
     );
   }
 
@@ -132,7 +143,7 @@ export class DatabaseService {
         const doc = document.implementation.createHTMLDocument('New Document');
         doc.body.innerHTML = res;
         return doc.body;
-      })
+      }),
     );
   }
 }

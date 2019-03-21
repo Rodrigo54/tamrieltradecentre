@@ -8,8 +8,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { LoadingComponent } from './loading/loading.component';
+
 @NgModule({
-  declarations: [],
+  declarations: [LoadingComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -19,7 +21,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatTableModule,
     MatAutocompleteModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
   ],
   exports: [
     CommonModule,
@@ -30,7 +32,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatTableModule,
     MatAutocompleteModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+  ],
+  entryComponents: [
+    LoadingComponent
   ]
 })
 export class SharedModule {}
