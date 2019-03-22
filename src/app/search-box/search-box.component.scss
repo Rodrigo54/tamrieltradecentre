@@ -6,6 +6,9 @@
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
+  form{
+    display: contents;
+  }
   .mat-card{
     padding: 0px;
     display: flex;
