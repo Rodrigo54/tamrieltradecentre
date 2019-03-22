@@ -108,7 +108,7 @@ export class DatabaseService {
     return of(proxy).pipe(
       delay(3000),
       switchMap(proxxy =>  this.httpClient.get(
-        `${proxxy}https://us.tamrieltradecentre.com/pc/Trade/SearchResult`,
+        `${this.proxy}${proxxy}https://us.tamrieltradecentre.com/pc/Trade/SearchResult`,
         { ...httpOptions, responseType: 'text', params: { ...data } }
       )),
       first(),
