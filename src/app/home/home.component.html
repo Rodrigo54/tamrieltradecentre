@@ -3,7 +3,7 @@
     <div class="item-content">
       <img class="item-img" [src]="item.img" [alt]="item.name">
       <div>
-        <h3>{{item.name}}</h3>
+        <h3 class="item-name" [ngClass]="item.quality">{{item.name}}</h3>
         <p>Starting From <img class="gold-icon" src="https://us.tamrieltradecentre.com/Content/icons/gold.png" alt="gold">  <span class="gold-amount">{{item.gold}}</span></p>
         <p>{{item.entries}} {{item.amount}}</p>
       </div>

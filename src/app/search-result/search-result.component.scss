@@ -83,6 +83,21 @@
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
+      h3{
+        text-shadow: 1px 1px 5px #E0E0E0;
+        &.fine {
+          color: #3c3;
+        }
+        &.superior {
+          color: #06f;
+        }
+        &.epic {
+          color: #c0f;
+        }
+        &.legendary{
+          color: #e6bc16;
+        }
+      }
     }
   }
   .item-img{
@@ -100,9 +115,10 @@
   margin: 10px 0px;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  justify-content: center;
   .btn{
     padding: 0px 5px;
+    margin: 0px 5px;
     min-width: 50px;
   }
 }

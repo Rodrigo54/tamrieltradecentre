@@ -2,8 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import * as moment from 'moment';
-import { pipe, of } from 'rxjs';
-import { map, finalize, first, catchError } from 'rxjs/operators';
+import { of, pipe } from 'rxjs';
+import { catchError, finalize, first, map } from 'rxjs/operators';
+
 import { LoadingService } from '../shared/loading/loading.service';
 
 export interface ParamsSearch extends Params {
@@ -46,6 +47,7 @@ export class DatabaseService {
         itens.forEach(item => {
           const ItemID = item.getAttribute('data-on-click-link').match(/ItemID=(\d*)/)[1];
           const name = item.querySelector('.row>.col-xs-5>div').textContent.trim();
+          const quality = item.querySelector('.row>.col-xs-5').className.match(/col-xs-5 item-quality-(\w*)/)[1];
           const img = item.querySelector('.row>.col-xs-5>img').getAttribute('src');
           const gold = item.querySelector('.row>.col-xs-3>.gold-amount').textContent.trim();
           const entries = item.querySelectorAll('.row>.col-xs-4>div')[0].textContent.trim();
@@ -57,6 +59,7 @@ export class DatabaseService {
             gold,
             amount,
             entries,
+            quality
           });
         });
         return array;
@@ -70,7 +73,32 @@ export class DatabaseService {
       `${this.proxy}https://us.tamrieltradecentre.com/api/pc/Trade/GetItemAutoComplete`,
       { ...httpOptions, params: { term: text } }
     ).pipe(
-      map((res: any[]) => res.map(i => ({ ...i, IconName: `https://us.tamrieltradecentre.com/Content/icons/${i.IconName}`}))),
+      map((res: any[]) => res.map(i => {
+        let quality: string;
+        switch (i.DefaultQualityID) {
+          case 0:
+          default:
+            quality = 'normal';
+            break;
+          case 1:
+            quality = 'fine';
+            break;
+          case 2:
+            quality = 'superior';
+            break;
+          case 3:
+            quality = 'epic';
+            break;
+          case 4:
+            quality = 'legendary';
+            break;
+        }
+        return {
+          ...i,
+          quality,
+          IconName: `https://us.tamrieltradecentre.com/Content/icons/${i.IconName}`
+        };
+      })),
     );
   }
 
@@ -107,6 +135,7 @@ export class DatabaseService {
           let guild: string;
           const td = item.querySelectorAll('td');
           const name = td[0].querySelectorAll('div')[0].textContent.trim();
+          const quality = item.querySelector('img').className.match(/trade-item-icon item-quality-(\w*)/)[1];
           const level = td[0].querySelectorAll('div')[1].textContent.replace(/[\r\n]\s*/gm, ' ').trim();
           const img = td[0].querySelector('img').getAttribute('src');
           const trader = td[1].querySelector('div').textContent.trim();
@@ -121,6 +150,7 @@ export class DatabaseService {
           const lastSeen = td[4].getAttribute('data-mins-elapsed');
           arrayItens.push({
             name,
+            quality,
             img: `https://us.tamrieltradecentre.com${img}`,
             level: level.substr(7),
             trader,

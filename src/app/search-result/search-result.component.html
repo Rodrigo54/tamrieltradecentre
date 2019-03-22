@@ -13,7 +13,7 @@
         <div class="item-name">
           <img class="item-img" [src]="item.img" [alt]="item.name">
           <div>
-            <h3>{{item.name}}</h3>
+            <h3 [ngClass]="item.quality">{{item.name}}</h3>
             <div class="level">
               <p>Level:</p>
               <img src="https://us.tamrieltradecentre.com/Content/icons/nonvet.png" alt="level">

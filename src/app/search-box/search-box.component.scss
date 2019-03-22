@@ -36,6 +36,21 @@
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: center;
+  span{
+    text-shadow: 1px 1px 5px #E0E0E0;
+    &.fine {
+      color: #3c3;
+    }
+    &.superior {
+      color: #06f;
+    }
+    &.epic {
+      color: #c0f;
+    }
+    &.legendary{
+      color: #e6bc16;
+    }
+  }
 }
 
 .option-img{

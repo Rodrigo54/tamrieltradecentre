@@ -6,10 +6,10 @@
     Search <mat-icon>search</mat-icon>
   </button>
   <mat-autocomplete autoActiveFirstOption [displayWith]="displayWith" #auto="matAutocomplete" (optionSelected)="onSubmit($event)">
-    <mat-option *ngFor="let state of filteredStates | async" [value]="state">
+    <mat-option *ngFor="let item of filteredStates | async" [value]="item">
       <div class="autocomplete-option">
-        <img class="option-img" aria-hidden [src]="state.IconName">
-        <span>{{state.label}}</span>
+        <img class="option-img" aria-hidden [src]="item.IconName">
+        <span [ngClass]="item.quality">{{item.label}}</span>
       </div>
     </mat-option>
   </mat-autocomplete>
