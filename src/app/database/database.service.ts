@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import * as moment from 'moment';
 import { of, pipe } from 'rxjs';
-import { catchError, finalize, first, map } from 'rxjs/operators';
+import { catchError, delay, finalize, first, map, switchMap } from 'rxjs/operators';
 
 import { LoadingService } from '../shared/loading/loading.service';
 
@@ -103,11 +103,14 @@ export class DatabaseService {
   }
 
   searchItem(data: Partial<ParamsSearch>) {
+    const proxy = 'https://thingproxy.freeboard.io/fetch/';
     this.loading.open();
-    return this.httpClient.get(
-      `${this.proxy}https://us.tamrieltradecentre.com/pc/Trade/SearchResult`,
-      { ...httpOptions, responseType: 'text', params: { ...data } }
-    ).pipe(
+    return of(proxy).pipe(
+      delay(3000),
+      switchMap(proxxy =>  this.httpClient.get(
+        `${proxxy}https://us.tamrieltradecentre.com/pc/Trade/SearchResult`,
+        { ...httpOptions, responseType: 'text', params: { ...data } }
+      )),
       first(),
       this.makeDoc(),
       map(htmlObject => {
