@@ -26,7 +26,7 @@ const httpOptions = {
 })
 export class DatabaseService {
 
-  proxy = 'https://cors-anywhere.herokuapp.com/';
+  proxy = 'https://ttc-cors.herokuapp.com/';
 
   constructor(
     private httpClient: HttpClient,
@@ -103,12 +103,11 @@ export class DatabaseService {
   }
 
   searchItem(data: Partial<ParamsSearch>) {
-    const proxy = 'https://thingproxy.freeboard.io/fetch/';
     this.loading.open();
-    return of(proxy).pipe(
+    return of([]).pipe(
       delay(3000),
-      switchMap(proxxy =>  this.httpClient.get(
-        `${this.proxy}${proxxy}https://us.tamrieltradecentre.com/pc/Trade/SearchResult`,
+      switchMap(() => this.httpClient.get(
+        `${this.proxy}https://us.tamrieltradecentre.com/pc/Trade/SearchResult`,
         { ...httpOptions, responseType: 'text', params: { ...data } }
       )),
       first(),
