@@ -1,7 +1,10 @@
 .grid-itens{
   display: grid;
-  grid-template: repeat(5, 1fr) / repeat(2, 1fr);
+  grid-template: repeat(10, 1fr) / 1fr;
   grid-gap: 15px;
+  @media screen and (min-width: 720px) {
+    grid-template: repeat(5, 1fr) / repeat(2, 1fr);
+  }
   .item{
     background-color: #e0ffff;
     border-width: 1px;

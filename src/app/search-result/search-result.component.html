@@ -19,15 +19,16 @@
               <img src="https://us.tamrieltradecentre.com/Content/icons/nonvet.png" alt="level">
               <p>{{item.level}}</p>
             </div>
-            <p>Trader: {{item.trader}}</p>
+            <p *ngIf="item.trait">Trait: {{item.trait}}</p>
           </div>
         </div>
         <div class="location">
           <p>Location: {{item.location}}</p>
           <p>Guild: {{item.guild}}</p>
+          <p>Trader: {{item.trader}}</p>
         </div>
-        <div>
-          <div class="price">
+        <div class="price">
+          <div class="price-box">
             <img src="https://us.tamrieltradecentre.com/Content/icons/gold.png" alt="gold">
             <span>{{item.value.gold}}</span>
             <mat-icon>clear</mat-icon>
@@ -44,7 +45,7 @@
     </div>
     <div class="pagination">
       <ng-container *ngFor="let page of data.pagination; let i=index">
-        <ng-container *ngIf="i === 0" >
+        <ng-container *ngIf="i === 0">
           <button (click)="pageClick(page.number)" class="btn" [disabled]="page.status === 'disabled'" mat-raised-button
             [color]="page.status === 'active' ? 'accent' : 'primary'">
             <mat-icon>chevron_left</mat-icon>

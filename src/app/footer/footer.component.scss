@@ -1,20 +1,27 @@
 :host{
+  width: 90vw;
   max-width: 900px;
   margin: auto;
-  padding: 20px;
+  padding: 20px 0px;
   display: block;
 }
 
 .links{
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
   justify-content: flex-end;
+  align-items: flex-end;
+  @media screen and (min-width: 720px) {
+    flex-flow: row nowrap;
+  }
   a{
     text-decoration: none;
     color: white;
     padding: 0px 5px;
-    &:not(:last-child) {
-      border-right: 1px solid white;
+    @media screen and (min-width: 720px) {
+      &:not(:last-child) {
+        border-right: 1px solid white;
+      }
     }
     &:hover{
       color: #1e88e5;

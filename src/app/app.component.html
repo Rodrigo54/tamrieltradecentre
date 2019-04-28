@@ -1,24 +1,24 @@
 <div class="app-box">
   <header class="header">
-    <div>
-      <mat-toolbar color="primary">
-        <a class="home-link" [routerLink]="['/']">
-          <img src="https://tamrieltradecentre.com/Logo.png" alt="logo">
-          <span>Tamriel Trade Centre</span>
-        </a>
-      </mat-toolbar>
-      <div class="hero">
-        <h1> Welcome to {{ title }}! </h1>
-        <p>Post, Browse, Search and Trade</p>
-      </div>
+    <mat-toolbar class="mat-elevation-z2" color="primary">
+      <a class="home-link" [routerLink]="['/']">
+        <img src="https://tamrieltradecentre.com/Logo.png" alt="logo">
+        <span>Tamriel Trade Centre</span>
+      </a>
+    </mat-toolbar>
+    <div class="hero mat-elevation-z2">
+      <h1> Welcome to {{ title }}! </h1>
+      <p>Post, Browse, Search and Trade</p>
     </div>
   </header>
   <div class="content">
     <main>
       <app-search-box></app-search-box>
-      <mat-card class="main-grid">
-        <router-outlet></router-outlet>
-      </mat-card>
+      <div class="main-grid">
+        <mat-card class="mat-elevation-z2">
+          <router-outlet></router-outlet>
+        </mat-card>
+      </div>
     </main>
     <app-footer></app-footer>
   </div>
