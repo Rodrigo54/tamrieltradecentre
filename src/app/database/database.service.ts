@@ -17,7 +17,7 @@ export interface ParamsSearch extends Params {
 const httpOptions = {
   headers: new HttpHeaders({
     'x-requested-with': 'https://us.tamrieltradecentre.com',
-    'Content-Type':  'text/html',
+    'Content-Type': 'text/html',
   }),
 };
 
@@ -127,7 +127,7 @@ export class DatabaseService {
           if (pagina.nodeName === 'LI') {
             arrayPagination.push({
               status: pagina.className ? pagina.className : 'default',
-              value:  pagina.children[0].textContent.trim(),
+              value: pagina.children[0].textContent.trim(),
               number: numberPage,
             });
           }
@@ -135,6 +135,7 @@ export class DatabaseService {
         itens.forEach(item => {
           let location: string;
           let guild: string;
+          let trait: string;
           const td = item.querySelectorAll('td');
           const name = td[0].querySelectorAll('div')[0].textContent.trim();
           const quality = item.querySelector('img').className.match(/trade-item-icon item-quality-(\w*)/)[1];
@@ -142,13 +143,15 @@ export class DatabaseService {
           const img = td[0].querySelector('img').getAttribute('src');
           const trader = td[1].querySelector('div').textContent.trim();
           try {
+            trait = td[0].querySelector('img').getAttribute('data-trait');
             location = td[2].querySelectorAll('div')[0].textContent.trim();
             guild = td[2].querySelectorAll('div')[1].textContent.trim();
           } catch (error) {
             location = 'unknown';
-            guild =  'unknown';
+            guild = 'unknown';
+            trait = undefined;
           }
-          const [ gold, amount, total ] = td[3].innerText.replace(/[\r\n]\s*/gm, ' ').trim().split(/\sX\s|\s=\s/);
+          const [gold, amount, total] = td[3].innerText.replace(/[\r\n]\s*/gm, ' ').trim().split(/\sX\s|\s=\s/);
           const lastSeen = td[4].getAttribute('data-mins-elapsed');
           arrayItens.push({
             name,
@@ -156,6 +159,7 @@ export class DatabaseService {
             img: `https://us.tamrieltradecentre.com${img}`,
             level: level.substr(7),
             trader,
+            trait,
             location,
             guild,
             value: { gold, amount, total },
