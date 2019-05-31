@@ -16,11 +16,11 @@
   }
   a{
     text-decoration: none;
-    color: white;
+    color: var(--text-color);
     padding: 0px 5px;
     @media screen and (min-width: 720px) {
       &:not(:last-child) {
-        border-right: 1px solid white;
+        border-right: 1px solid var(--text-color);
       }
     }
     &:hover{
