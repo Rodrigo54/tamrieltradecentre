@@ -1,9 +1,12 @@
 {
+  "dir": "ltr",
+  "lang": "pt-br",
   "name": "tamrieltradecentre",
   "short_name": "tamrieltradecentre",
   "theme_color": "#2e7d32",
   "background_color": "#A5D6A7",
   "display": "standalone",
+  "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
   "icons": [
