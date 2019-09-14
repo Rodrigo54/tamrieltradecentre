@@ -105,7 +105,7 @@ export class DatabaseService {
   searchItem(data: Partial<ParamsSearch>) {
     this.loading.open();
     return of([]).pipe(
-      delay(3000),
+      delay(1500),
       switchMap(() => this.httpClient.get(
         `${this.proxy}https://us.tamrieltradecentre.com/pc/Trade/SearchResult`,
         { ...httpOptions, responseType: 'text', params: { ...data } }

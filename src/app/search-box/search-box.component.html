@@ -1,11 +1,11 @@
 <div class="search-box">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-card>
-      <input [formControl]="stateCtrl" [matAutocomplete]="auto" type="text" placeholder="Search for Item">
+    <mat-card matAutocompleteOrigin #origin="matAutocompleteOrigin">
+      <input [formControl]="stateCtrl" [matAutocomplete]="auto" [matAutocompleteConnectedTo]="origin" type="text" placeholder="Search for Item">
+      <button type="submit" class="btn-search" mat-icon-button color="primary">
+        <mat-icon>search</mat-icon>
+      </button>
     </mat-card>
-    <button type="submit" class="btn-search" mat-raised-button color="primary">
-      Search <mat-icon>search</mat-icon>
-    </button>
   </form>
   <mat-autocomplete [displayWith]="displayWith" #auto="matAutocomplete" (optionSelected)="onSubmit($event)">
     <mat-option *ngFor="let item of filteredStates | async" [value]="item">

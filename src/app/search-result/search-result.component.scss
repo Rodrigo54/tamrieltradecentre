@@ -61,9 +61,6 @@
     &>div{
       width: 100%;
       flex: 1;
-      @media screen and (min-width: 720px) {
-        margin-right: 15px;
-      }
     }
     .location{
       flex: 30%;
@@ -82,11 +79,14 @@
     }
     .price{
       flex: 35%;
-      &-box{
+      div{
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
         justify-content: center;
+        @media screen and (min-width: 720px) {
+          justify-content: flex-end;
+        }
       }
       span{
         color: #FF9800;
@@ -112,6 +112,7 @@
         }
       }
       h3{
+        white-space: normal;
         text-shadow: 1px 1px 5px #E0E0E0;
         &.fine {
           color: #3c3;
