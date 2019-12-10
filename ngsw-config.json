@@ -40,15 +40,6 @@
           "https://fonts.googleapis.com/**"
         ]
       }
-    }, {
-      "name": "icons",
-      "installMode": "lazy",
-      "updateMode": "lazy",
-      "resources": {
-        "urls": [
-          "https://us.tamrieltradecentre.com/Content/**/*.(svg|jpg|png|webp|gif)"
-        ]
-      }
     }
   ]
 }
